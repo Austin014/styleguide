@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>[CLIENT NAME] Style Guide</title>
+    <link type="text/css" rel="stylesheet" href="main.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    <!-- Include links to your web fonts here   -->
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,100,300,700,900' rel='stylesheet' type='text/css'>
+    <script src="main.js" type="text/javascript"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            //this is converting the RGBA code to Hex code, just let it do its thing.
+            //pulled from this-- http://jsfiddle.net/Mottie/xcqpF/1/light/
+            function rgb2hex(rgb) {
+                rgb = rgb.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);
+                return (rgb && rgb.length === 4) ? "#" +
+                    ("0" + parseInt(rgb[1], 10).toString(16)).slice(-2) +
+                    ("0" + parseInt(rgb[2], 10).toString(16)).slice(-2) +
+                    ("0" + parseInt(rgb[3], 10).toString(16)).slice(-2) : '';
+            };
+            
+            //this is the actual function that grabs your typography info from the CSS. No touch.
+            function typefunct(element) {
+                var typefont = $(element).css("font-family");
+                var typeweight = $(element).css("font-weight");
+                var typesize = $(element).css("font-size");
+                var typecolor = rgb2hex($(element).css("color"));
+                $(element).append("<div class='typeinfo'>" + typefont + " | " + typeweight + " | " + typesize + " | " + typecolor + "</div>");
+            };
+
+            //this is grabbing the color info for the UI color section. Leave it as is.
+            function colorappend(tilenumber) {
+                var tilecolor = rgb2hex($(tilenumber).css("background-color"));
+                $(tilenumber).parent().append("<span class='colorvalue'>" + tilecolor + "</span>");
+            };
+
+            //you probably won't need to change these, but it puts those descriptions under the elements for you
+            typefunct("h1");
+            typefunct("h2");
+            typefunct("h3");
+            typefunct("p");
+            typefunct("#textlink");
+
+            //****** may require work from you ****** 
+            //The number of functions you call here NEEDS to match the amount of UI color swatches you have
+            colorappend("#color1");
+            colorappend("#color2");
+            colorappend("#color3");
+            colorappend("#color4");
+            colorappend("#color5");
+            colorappend("#color6");
+
+
+            //this opens up a prompt with the hex code of the swatch you clicked on, making it easy to copy color values
+            function copytoprompt(tile) {
+                var copycolor = rgb2hex($(tile).css("background-color"));
+                prompt("Copy the hex code and press enter!", copycolor);
+            };
+            $('.colorswatch').click(function () {
+                copytoprompt($(this));
+            });
+
+
+
+
+            //this script controls the custom interaction example
+            $('#fab').click(function () {
+                $(this).toggleClass('fab-post');
+                $('#contentcard').toggleClass('content-red');
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div id="titlebar">
+
+        <!--  Replace img src with your client's logo  -->
+        <img id="clientlogo" src="Marsh-ClearSight-Rev-Logo2.png">
+    </div>
+    <div class="clearfloat"></div>
+    <div id="wrapper">
+        <div id="textwrap">
+            <span class="subhead">Type</span>
+
+            <h1>H1- The Most Important Info</h1>
+
+            <h2>H2- Also Very Important</h2>
+
+            <h3>H3- Great for Subheads</h3>
+
+            <p>This is an example of body copy!
+                <br>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi faucibus urna eget justo ullamcorper volutpat. Vestibulum porttitor, felis id molestie pretium, augue velit imperdiet quam, id sollicitudin arcu nisl eget justo. Vivamus mattis rutrum nisl vitae aliquam. Aenean suscipit tincidunt vulputate.</p>
+
+            <span id="textlink">This is a hyperlink</span>
+        </div>
+
+        <div id="colorwrap">
+            <span class="subhead">UI Colors</span>
+            <div id="tilewrap">
+                <div class="colortile">
+                    <div class="colorswatch" id="color1"></div>
+                </div>
+                <div class="colortile">
+                    <div class="colorswatch" id="color2"></div>
+                </div>
+
+                <div class="colortile">
+                    <div class="colorswatch" id="color3"></div>
+                </div>
+
+                <div class="colortile">
+                    <div class="colorswatch" id="color4"></div>
+                </div>
+
+                <div class="colortile">
+                    <div class="colorswatch" id="color5"></div>
+                </div>
+
+                <div class="colortile">
+                    <div class="colorswatch" id="color6"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="clearfloat"></div>
+        <br>
+        <br>
+        <br>
+        <span class="subhead">Buttons and Icons</span>
+        <div class="buttonwrap">
+            <div class="button" id="primarybtn">
+                <div class="vertical-align buttontext">
+                    BUTTON
+                </div>
+            </div>
+        </div>
+
+        <div class="buttonwrap">
+            <div class="button" id="secondarybtn">
+                <div class="vertical-align buttontext">
+                    BUTTON
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <span class="subhead">Image Rollovers</span>
+
+        <!--   The image you see comes from the background-url tag in CSS, applied to "imgwrapper"     -->
+        <div class="imgwrapper">
+            <div class="rollover">
+                Any kind of content can go here.
+            </div>
+        </div>
+
+        <br>
+        <br>
+        <br>
+        <span class="subhead">Navigation</span>
+        <div id="navwrap">
+            <div class="bar">HOME</div>
+            <div class="bar">CONTACT US</div>
+            <div class="bar">PRODUCTS</div>
+            <div class="bar">SHOP</div>
+            <div class="bar">ABOUT</div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <span class="subhead">Other Interactions</span>
+        <div id="interactionwrapper">
+            <div id="contentcard">
+                <div id="fab" class="fab-pre"></div>
+            </div>
+        </div>
+        <span id="interactiontext">Click the button, then the navbar.</span>
+
+    </div>
+</body>
+
+</html>
